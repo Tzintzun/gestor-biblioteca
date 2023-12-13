@@ -1,2 +1,5 @@
-# gestor-biblioteca
-Gestor de biblioteca personal
+# Gestor CLI de biblioteca personal
+
+## Ejecutar
+`npm install`
+`npm app.js`
