@@ -1,0 +1,2 @@
+-Saga y numero de saga
+-Desplegar listas de autores ya registrados
