@@ -121,5 +121,30 @@ const pausa = async () => {
     });
 }
 
+const listar_libros = async (libros) =>{
+    const choices =libros.map((libro, i) => {
+        return {
+            value: libro.id,
+            name: `${ ((i+1)+'.').green } ` + libro.titulo
+        }
+    });
+    choices.push({
+        value: 'return',
+        name:`${'0.'.green} Regresar`
+    })
 
-export {menu_principal, pausa, menu_registrar_libro}
+    const {opcion} = await inquirer.prompt({
+        type: 'list',
+        name: 'opcion',
+        message: 'Que libro quieres consultar?',
+        choices
+
+    });
+    if (opcion === 'return'){
+        return true;
+    }
+    return opcion;
+}
+
+
+export {menu_principal, pausa, menu_registrar_libro, listar_libros}

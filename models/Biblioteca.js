@@ -68,6 +68,18 @@ class Biblioteca{
         guardar_datos('autores.json',JSON.stringify(this.__autores));
         guardar_datos('editoriales.json',JSON.stringify(this.__editoriales));
     }
+    get libros_array(){
+        const arreglo = [];
+
+        Object.keys(this.__libros).forEach(libro =>{
+            arreglo.push({
+                id:libro,
+                ...this.__libros[libro]
+
+            });
+        })
+        return arreglo;
+    }
 }
 
 export {Biblioteca};

@@ -14,7 +14,7 @@
 */
 
 import { Biblioteca } from "./models/Biblioteca.js";
-import { menu_principal, menu_registrar_libro, pausa } from "./view/menu.js";
+import { listar_libros, menu_principal, menu_registrar_libro, pausa } from "./view/menu.js";
 
 
 const main = async () => {
@@ -26,7 +26,20 @@ const main = async () => {
          opcion = await menu_principal();
          switch(opcion){
             case 1:
-                console.log(biblioteca.__libros);
+                
+                const opcion = await listar_libros(biblioteca.libros_array);
+                
+                if(opcion !== true){
+                    const libro =  biblioteca.__libros[opcion];
+                    console.log('ISBN: '.yellow + libro.isbn);
+                    console.log('Titulo: '.yellow + libro.titulo);
+                    console.log('Autor: '.yellow + biblioteca.__autores[libro.autor_id]);
+                    console.log('Edicion: '.yellow + libro.edicion);
+                    console.log('Editorial: '.yellow + biblioteca.__editoriales[libro.editorial_id]);
+                    console.log('Idioma: '.yellow + libro.idioma);
+                    console.log('N° Paginas: '.yellow + libro.num_pag);
+                    console.log('Formato: '.yellow + (libro.es_digital? 'Digital': 'Fisico'));
+                }
                 await pausa();
                 break;
             case 4:
