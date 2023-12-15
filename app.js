@@ -16,13 +16,14 @@
 import { Biblioteca } from "./models/Biblioteca.js";
 import { menu_principal, menu_registrar_libro, pausa } from "./view/menu.js";
 
+
 const main = async () => {
     
     let opcion ;
     const biblioteca = new Biblioteca()
+    biblioteca.cargar_datos_biblioteca();
     do{
          opcion = await menu_principal();
-
          switch(opcion){
             case 1:
                 console.log(biblioteca.__libros);
@@ -31,6 +32,7 @@ const main = async () => {
             case 4:
                 const respuesta = await menu_registrar_libro();
                 biblioteca.agregar_libro(respuesta);
+                biblioteca.guardar_datos_biblioteca();
                 await pausa();
                 break;
          }

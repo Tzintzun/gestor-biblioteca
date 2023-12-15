@@ -1,6 +1,7 @@
 
 import { nanoid } from "nanoid"
 import { Libro } from "./Libro.js";
+import { guardar_datos,cargar_datos } from "../helpers/archivos.js";
 class Biblioteca{
     __autores = {}
     __editoriales = {}
@@ -25,10 +26,8 @@ class Biblioteca{
 
         const libro = new Libro(isbn, datos.titulo, autor_id, datos.edicion, editorial_id, datos.idioma, datos.num_pag, es_digital, datos.saga);
         
-        id = nanoid();
+        const id = nanoid();
         this.__libros[id] = libro;
- 
-
 
     }
 
@@ -45,12 +44,29 @@ class Biblioteca{
     checar_editorial(editorial){
         if(editorial){
             Object.keys(this.__editoriales).forEach(key =>{
-                if(this.__editoriales[key] === autor){
+                if(this.__editoriales[key] === editorial){
                     return key;
                 }  
             })
         }
         return null;
+    }
+    cargar_datos_biblioteca(){
+        
+        const libros = cargar_datos('libros.json') ?? {};
+        this.__libros = libros;
+
+        const autores = cargar_datos('autores.json') ?? {};
+        this.__autores = autores;
+
+        const editoriales = cargar_datos('editoriales.json') ?? {};
+        this.__editoriales = editoriales;
+    }
+
+    guardar_datos_biblioteca(){
+        guardar_datos('libros.json',JSON.stringify(this.__libros));
+        guardar_datos('autores.json',JSON.stringify(this.__autores));
+        guardar_datos('editoriales.json',JSON.stringify(this.__editoriales));
     }
 }
 
