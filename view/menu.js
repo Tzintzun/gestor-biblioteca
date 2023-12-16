@@ -8,24 +8,35 @@ const opciones_menu_principal = [
     },
     {
         value: 2,
-        name: "Listar Autores"
-    },
-    {
-        value: 3,
         name: "Filtrar libros"
     },
     {
-        value: 4,
+        value: 3,
         name: "Agregar Libro"
     },
     {
-        value: 5,
+        value: 4,
         name: "Borrar Libro"
     },
     {
         value: 0,
         name: "Salir"
     },
+]
+
+const filtros =[
+    {
+        value: 1,
+        name: 'Autor',
+    },
+    {
+        value: 2,
+        name: 'Editorial'
+    },
+    {
+        value: 0,
+        name: "Salir"
+    }
 ]
 
 const menu_principal = async () => {
@@ -95,7 +106,7 @@ const preguntas = [
     },
     {
         type: 'rawlist',
-        name: 'digital',
+        name: 'formato',
         message: '¿Que tipo de libro es?',
         choices: ['Digital', 'Fisico']
     },
@@ -121,11 +132,22 @@ const pausa = async () => {
     });
 }
 
-const listar_libros = async (libros) =>{
-    const choices =libros.map((libro, i) => {
+const menu_escoger_filtro = async()=>{
+    const {filtro} = await inquirer.prompt({
+        type: 'rawlist',
+        name: 'filtro',
+        choices: filtros
+    })
+
+    return filtro;
+
+}
+const listar_objetos = async (objetos, tipo_objeto) =>{
+    
+    const choices =objetos.map((objeto, i) => {
         return {
-            value: libro.id,
-            name: `${ ((i+1)+'.').green } ` + libro.titulo
+            value: objeto.id,
+            name: `${ ((i+1)+'.').green } ` + objeto.nombre
         }
     });
     choices.push({
@@ -136,7 +158,7 @@ const listar_libros = async (libros) =>{
     const {opcion} = await inquirer.prompt({
         type: 'list',
         name: 'opcion',
-        message: 'Que libro quieres consultar?',
+        message: `Que ${tipo_objeto} quieres consultar?`,
         choices
 
     });
@@ -147,4 +169,5 @@ const listar_libros = async (libros) =>{
 }
 
 
-export {menu_principal, pausa, menu_registrar_libro, listar_libros}
+
+export {menu_principal, pausa, menu_registrar_libro, listar_objetos,menu_escoger_filtro}

@@ -2,7 +2,7 @@
 
 class Libro{
     isbn = '';
-    titulo = '';
+    nombre = '';
     autor_id = '';
     edicion = '';
     editorial_id = '';
@@ -15,7 +15,7 @@ class Libro{
     constructor(isbn , titulo, author_id, edicion, editorial_id, idioma, num_pag, es_digital = false, saga ){
         
         this.isbn = isbn;
-        this.titulo = titulo;
+        this.nombre = titulo;
         this.autor_id = author_id;
         this.edicion = edicion;
         this.editorial_id = editorial_id;
