@@ -14,7 +14,7 @@
 */
 
 import { Biblioteca } from "./models/Biblioteca.js";
-import {listar_objetos, menu_continuar, menu_escoger_filtro, menu_principal, menu_registrar_libro, pausa } from "./view/menu.js";
+import {confirmacion, listar_objetos, menu_continuar, menu_escoger_filtro, menu_principal, menu_registrar_libro, pausa } from "./view/menu.js";
 
 
 const main = async () => {
@@ -86,6 +86,11 @@ const main = async () => {
                 biblioteca.guardar_datos_biblioteca();
                 await pausa();
                 break;
+            case 4:
+                opcion_libro = await listar_objetos(biblioteca.libros_array, 'libro');
+                if(await confirmacion(`¿Seguro que quieres borrar "${(biblioteca.__libros[opcion_libro].nombre).red}" de tu lista de libros?`)){
+                    biblioteca.borrar_libro(opcion_libro);
+                }
          }
          
     }while(opcion !== 0);

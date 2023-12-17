@@ -184,5 +184,14 @@ const menu_continuar = async () => {
     return opcion;
 }
 
+const confirmacion = async (message) => {
+    const {respuesta} = await inquirer.prompt({
+        message,
+        type: 'confirm',
+        name: 'respuesta'
+    });
+    return respuesta;
+}
 
-export {menu_principal, pausa, menu_registrar_libro, listar_objetos,menu_escoger_filtro, menu_continuar}
+
+export {menu_principal, pausa, menu_registrar_libro, listar_objetos,menu_escoger_filtro, menu_continuar,confirmacion}

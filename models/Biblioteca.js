@@ -103,6 +103,12 @@ class Biblioteca{
         console.log('N° Paginas: '.yellow + libro.num_pag);
         console.log('Formato: '.yellow + libro.formato);
     }
+
+    borrar_libro (id){
+        delete this.__libros[id];
+        guardar_datos('libros.json',JSON.stringify(this.__libros));
+
+    }
     get libros_array(){
         const arreglo = [];
 
