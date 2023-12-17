@@ -151,7 +151,7 @@ const listar_objetos = async (objetos, tipo_objeto) =>{
         }
     });
     choices.push({
-        value: 'return',
+        value: 0,
         name:`${'0.'.green} Regresar`
     })
 
@@ -162,12 +162,27 @@ const listar_objetos = async (objetos, tipo_objeto) =>{
         choices
 
     });
-    if (opcion === 'return'){
-        return true;
-    }
     return opcion;
 }
 
 
+const menu_continuar = async () => {
+    const {opcion} = await inquirer.prompt({
+        type: 'list',
+        name: 'opcion',
+        choices: [
+            {
+                value: 0,
+                name: 'Regresar'
+            },
+            {
+                value: 1,
+                name: 'Continuar'
+            }
+        ]
+    });
+    return opcion;
+}
 
-export {menu_principal, pausa, menu_registrar_libro, listar_objetos,menu_escoger_filtro}
+
+export {menu_principal, pausa, menu_registrar_libro, listar_objetos,menu_escoger_filtro, menu_continuar}
